@@ -1,0 +1,62 @@
+body {
+  background-color: wheat;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.content {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+.content h1 {
+  color: #22298f;
+}
+.content h4 {
+  color: #666;
+}
+.content table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+.content table th, .content table td {
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+.content table th {
+  background-color: whitesmoke;
+  color: #333;
+}
+.content a {
+  display: inline-block;
+  padding: 8px 16px;
+  margin: 5px;
+  border-radius: 20px;
+  background-color: #5460bb;
+  color: #fff;
+  text-decoration: none;
+  transition: back ground-color 0.3s ease;
+}
+.content a:hover {
+  background-color: #22298f;
+}
+.content input {
+  padding: 10px;
+  margin: 5px;
+  border: solid 1px;
+  border-radius: 5px;
+}
+.content #btn_Add {
+  background-color: #28a745;
+  color: #fff;
+  cursor: pointer;
+}
+.content #btn_Add:hover {
+  background-color: #1d7430;
+}/*# sourceMappingURL=styles.css.map */
