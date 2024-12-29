@@ -1,0 +1,60 @@
+{%extends 'base.html'%}
+
+{%block head%}
+    <style>
+        .container {
+            margin-top: 100px;
+        }
+    </style>
+    <title> The Box Vault</title>
+{%endblock%}
+
+
+
+    {%block body%}
+    <div class="content">
+        <h1> The Box Vault</h1>
+            <h2>View items in b</h2>
+      {% if all_items | length < 1 %}
+            <h2>Box is empty ... Create one here!</h2>
+      {% else %}
+            
+                <table>
+                    <tr>
+                        <th>Item</th>
+                        <th>Box</th>
+                        <th>Quantity</th>
+                        <th>Date Added</th>
+                    </tr>
+    
+                {% for item in all_items %}
+                    <tr>
+                        <td>{{item.name}}</td>
+                        <td>{{item.box}}</td>
+                        <td>{{item.quantity}}</td>
+                        <td>{{item.added_on.strftime("%Y-%m-%d")}}</td>
+                        <td> 
+                            <a href="/edit/{{item.id}}">Edit</a>
+                            <br/>
+                            <a href="/delete/{{item.id}}">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+    
+                </table>
+                {% endif %}
+    
+    
+                <form action="/" method="POST">
+                    <label>Item: </label>
+                        <input type="text" name="item" id="item" />
+                    <label>Box:</label>
+                        <input type="text" name="box" id="box" />
+                    
+                    <label>Quantity:</label>
+                        <input type="text" name="quantity" id="quantity" />
+                    
+                    <input type="submit" value="Add item" id="btn_Add" />
+            </div>
+    {%endblock%}
+    
