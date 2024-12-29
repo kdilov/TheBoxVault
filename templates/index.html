@@ -9,48 +9,112 @@
     <title> The Box Vault</title>
 {%endblock%}
 {%block body%}
+
+<!-- Timezone dropdown-->
+<body>
+    <form action="/set_timezone" method="POST">
+        <label for="timezone">Select Timezone:</label>
+        <select name="timezone" id="timezone">
+            <option value="UTC">UTC</option>
+            <option value="Europe/London">Europe</option>
+            <option value="Asia/Tokyo">Asia</option>
+        </select>
+        <button type="submit">Set Timezone</button>
+    </form>
+
+
 <div class="content">
     <h1> The Box Vault</h1>
         <h2>Welcome to the Home Page</h2>
+ 
   {% if all_items | length < 1 %}
-        <h2>Box is empty ... Create one here!</h2>
+        <h2>No items ... Create one here!</h2>
   {% else %}
-        
-            <table>
-                <tr>
+    
+<!-- Table to display items -->
+        <table>
+            <tr>
                     <th>Item</th>
                     <th>Box</th>
                     <th>Quantity</th>
                     <th>Date Added</th>
-                </tr>
+            </tr>
 
             {% for item in all_items %}
-                <tr>
+            <tr>
                     <td>{{item.name}}</td>
-                    <td>{{item.box}}</td>
+                    <td>{{item.box_id}}</td>
                     <td>{{item.quantity}}</td>
-                    <td>{{item.added_on.strftime("%Y-%m-%d")}}</td>
+                    <td>{{ item.added_on|format_time }}</td>
                     <td> 
                         <a href="/edit/{{item.id}}">Edit</a>
                         <br/>
                         <a href="/delete/{{item.id}}">Delete</a>
                     </td>
+            </tr>
+            {% endfor %}
+
+         </table>
+         <br>
+        {% endif %}
+<!-- Form to add items -->
+    <form action="/add_item" method="POST">
+        
+        <label>Item: </label>
+                <input type="text" name="item" id="item" />
+        <label>Box:</label>
+                <input type="text" name="box" id="box" />
+            
+        <label>Quantity:</label>
+                <input type="text" name="quantity" id="quantity" />
+            
+        <input type="submit" value="Add item" id="btn_Add" />
+            <br>
+    </form>
+
+   <!-- Table to display boxes-->
+        {% if all_boxes | length < 1 %}
+        <h2>Box is empty ... Create one here!</h2>
+        {% else %}
+            <table>
+                <tr>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>Comment</th>
+                    <th>Items</th>
+                </tr>
+
+            {% for box in all_boxes %}
+                <tr>
+                    <td>{{box.id}}</td>
+                    <td>{{box.title}}</td>
+                    <td>{{box.comment}}</td>
+                    <td>{{box.items}}</td>
+                    
+                    <td> 
+                        <a href="/edit/{{box.id}}">Edit</a>
+                        <br/>
+                        <a href="/delete_box/{{box.id}}">Delete</a>
+                    </td>
                 </tr>
             {% endfor %}
 
             </table>
+            <br>
             {% endif %}
 
 
-            <form action="/" method="POST">
-                <label>Item: </label>
-                    <input type="text" name="item" id="item" />
-                <label>Box:</label>
-                    <input type="text" name="box" id="box" />
-                
-                <label>Quantity:</label>
-                    <input type="text" name="quantity" id="quantity" />
-                
-                <input type="submit" value="Add item" id="btn_Add" />
+          <!-- Form to add boxes -->
+
+    <form action="/add_box" method="POST">
+               
+                    <label>Box title: </label>
+                        <input type="text" name="title" id="title" />
+                    <label>Comment:</label>
+                        <input type="text" name="comment" id="comment" />
+                    
+                    
+                    <input type="submit" value="Add box" id="btn_Add" />
+    </form>
         </div>
 {%endblock%}
